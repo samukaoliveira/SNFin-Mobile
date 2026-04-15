@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.AppML" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <item name="colorPrimary">@color/blue</item>
-        <item name="colorAccent">@color/blueAcent</item>
+        <item name="colorPrimary">@color/verde_principal</item>
+        <item name="colorAccent">@color/verde_agua</item>
     </style>
 
     <style name="Theme.AppML" parent="Base.Theme.AppML" />

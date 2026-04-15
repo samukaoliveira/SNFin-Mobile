@@ -5,6 +5,7 @@ import com.example.snfin.models.UsuarioLoginRequest;
 import com.example.snfin.models.escala.EscalaDetalhada;
 import com.example.snfin.models.escala.EscalaNotificacao;
 import com.example.snfin.models.escala.EscalaSimples;
+import com.example.snfin.models.lancamento.DashboardResponse;
 import com.example.snfin.models.mensalidade.Mensalidade;
 import com.example.snfin.models.musica.Musica;
 import com.example.snfin.models.musica.MusicaDetalhada;
@@ -21,6 +22,9 @@ public interface ApiService {
 
     @POST("login/")
     Call<LoginResponse> login(@Body UsuarioLoginRequest request);
+
+    @GET("dashboard/")
+    Call<DashboardResponse> getDashboard();
 
     @GET("escalas/")
     Call<List<EscalaSimples>> getListaEscalas();

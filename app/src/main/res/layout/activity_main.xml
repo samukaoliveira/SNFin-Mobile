@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -6,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- HEADER -->
+    <!-- ===== HEADER ===== -->
     <RelativeLayout
         android:padding="16dp"
         android:layout_width="match_parent"
@@ -14,12 +15,16 @@
 
         <ImageButton
             android:id="@+id/btnPrev"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@android:drawable/ic_media_previous"
             android:background="@android:color/transparent"
             android:layout_alignParentStart="true"/>
 
         <TextView
             android:id="@+id/tvCompetencia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Abr/2026"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -28,38 +33,43 @@
 
         <ImageButton
             android:id="@+id/btnNext"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@android:drawable/ic_media_next"
             android:background="@android:color/transparent"
             android:layout_toEndOf="@id/tvCompetencia"/>
 
         <Button
             android:id="@+id/btnLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Sair"
             android:textColor="@android:color/white"
             android:backgroundTint="@color/cinza_texto"
             android:layout_alignParentEnd="true"/>
     </RelativeLayout>
 
-    <!-- BOTÃO -->
+    <!-- ===== BOTÃO NOVO ===== -->
     <Button
         android:id="@+id/btnNovo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="➕ Novo Lançamento"
         android:backgroundTint="@color/verde_claro"
         android:textColor="@android:color/white"
-        android:layout_margin="16dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_margin="16dp"/>
 
-    <!-- CARDS -->
+    <!-- ===== CARDS ===== -->
     <GridLayout
         android:columnCount="2"
         android:padding="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!-- CARD TEMPLATE -->
+        <!-- SALDO EM CAIXA -->
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_columnWeight="1"
             android:layout_margin="8dp"
             card_view:cardCornerRadius="12dp"
@@ -72,12 +82,80 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="Saldo em Caixa"
                     android:textColor="#666"
                     android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tvSaldoCaixa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="R$ 0,00"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- SALDO PREVISTO -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_margin="8dp"
+            card_view:cardCornerRadius="12dp"
+            card_view:cardElevation="8dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Saldo Previsto"
+                    android:textColor="#666"
+                    android:textSize="13sp"/>
+
+                <TextView
+                    android:id="@+id/tvSaldoPrevisto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="R$ 0,00"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- RECEITAS PREVISTAS -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_margin="8dp"
+            card_view:cardCornerRadius="12dp"
+            card_view:cardElevation="8dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Receitas Previstas"
+                    android:textColor="#666"
+                    android:textSize="13sp"/>
+
+                <TextView
+                    android:id="@+id/tvReceitasPrevistas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="R$ 0,00"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -85,14 +163,108 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- DUPLICAR PARA OUTROS CARDS -->
-        <!-- saldo previsto -->
-        <!-- receitas -->
-        <!-- despesas -->
+        <!-- DESPESAS PREVISTAS -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_margin="8dp"
+            card_view:cardCornerRadius="12dp"
+            card_view:cardElevation="8dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Despesas Previstas"
+                    android:textColor="#666"
+                    android:textSize="13sp"/>
+
+                <TextView
+                    android:id="@+id/tvDespesasPrevistas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="R$ 0,00"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/despesa"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- RECEITAS REALIZADAS -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_margin="8dp"
+            card_view:cardCornerRadius="12dp"
+            card_view:cardElevation="8dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Receitas Realizadas"
+                    android:textColor="#666"
+                    android:textSize="13sp"/>
+
+                <TextView
+                    android:id="@+id/tvReceitasRealizadas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="R$ 0,00"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/verde_claro"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- DESPESAS REALIZADAS -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_margin="8dp"
+            card_view:cardCornerRadius="12dp"
+            card_view:cardElevation="8dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Despesas Realizadas"
+                    android:textColor="#666"
+                    android:textSize="13sp"/>
+
+                <TextView
+                    android:id="@+id/tvDespesasRealizadas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="R$ 0,00"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/despesa"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
     </GridLayout>
 
-    <!-- HEADER DA TABELA -->
+    <!-- ===== HEADER TABELA ===== -->
     <LinearLayout
         android:orientation="horizontal"
         android:background="@color/verde_principal"
@@ -100,17 +272,56 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView android:text="Data" android:textColor="@android:color/white" android:layout_weight="1"/>
-        <TextView android:text="Lançamento" android:textColor="@android:color/white" android:layout_weight="2"/>
-        <TextView android:text="Valor" android:textColor="@android:color/white" android:layout_weight="1"/>
-        <TextView android:text="Status" android:textColor="@android:color/white" android:layout_weight="1"/>
-        <TextView android:text="Ações" android:textColor="@android:color/white" android:layout_weight="1"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Data"
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Lançamento"
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Valor"
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Status"
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Ações"
+            android:textColor="@android:color/white"/>
+
     </LinearLayout>
 
-    <!-- LISTA -->
+    <!-- ===== LISTA ===== -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerLancamentos"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <!-- ===== LOADING ===== -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"/>
 
 </LinearLayout>

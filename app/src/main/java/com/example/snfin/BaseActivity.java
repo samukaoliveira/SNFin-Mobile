@@ -1,89 +1,21 @@
 package com.example.snfin;
 
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.IBinder;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.SeekBar;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.media3.common.Player;
 
-import com.example.snfin.services.MusicService;
+import com.google.android.material.button.MaterialButton;
 
 public class BaseActivity extends AppCompatActivity {
 
-    protected ImageButton btnHome;
-    protected ImageButton btnLogout;
-
-    protected View layoutFooterNormal;
-    protected View layoutPlayerFooter;
-    protected TextView tvFooterMusica;
-    protected ImageButton btnPlayPauseFooter;
-
-    protected MusicService musicService;
-    protected boolean isBound = false;
-
-    // Adicionar campos no BaseActivity
-    protected ImageButton btnNextFooter;
-    protected ImageButton btnPrevFooter;
-    protected ImageButton btnStopFooter;
-
-    protected ImageButton btnRepeatFooter;
-
-    private SeekBar seekBarFooter;
-    private final Handler seekHandler = new Handler();
-
-    private final MusicService.PlayerCallback playerCallback = new MusicService.PlayerCallback() {
-
-        @Override
-        public void onMusicChanged(String nome, int index) {
-            runOnUiThread(() -> {
-                if (tvFooterMusica != null && nome != null) {
-                    tvFooterMusica.setText(nome);
-                }
-                // Sempre que mudar de música, garantir footer visível
-                mostrarFooterPlayer();
-            });
-        }
-
-        @Override
-        public void onPlayStateChanged(boolean isPlaying) {
-            runOnUiThread(() -> {
-
-                if (btnPlayPauseFooter != null) {
-                    btnPlayPauseFooter.setImageResource(
-                            isPlaying
-                                    ? android.R.drawable.ic_media_pause
-                                    : android.R.drawable.ic_media_play
-                    );
-                }
-
-                if (!isPlaying) {
-                    // ✅ Só esconde o footer se foi um stop() de verdade
-                    // (stop() limpa os itens da playlist)
-                    if (musicService != null) {
-                        Player player = musicService.getPlayer();
-                        boolean semItens = player == null || player.getMediaItemCount() == 0;
-                        if (semItens) {
-                            esconderFooterPlayer();
-                        }
-                        // Se ainda tem itens na fila, é pause — footer permanece
-                    }
-                } else {
-                    mostrarFooterPlayer();
-                }
-            });
-        }
-    };
+    protected MaterialButton btnHome;
+    protected MaterialButton btnLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,26 +27,6 @@ public class BaseActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         setupHeaderButtons();
-        setupFooterViews();
-
-        Intent intent = new Intent(this, MusicService.class);
-        startService(intent);
-        bindService(intent, connection, BIND_AUTO_CREATE);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        seekHandler.removeCallbacks(updateSeekFooterRunnable);
-
-        if (musicService != null) {
-            musicService.removeCallback(playerCallback);
-        }
-
-        if (isBound) {
-            unbindService(connection);
-            isBound = false;
-        }
     }
 
     private void aplicarStatusBarTransparente() {
@@ -144,71 +56,6 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    private void setupFooterViews() {
-        layoutFooterNormal = findViewById(R.id.layoutFooterNormal);
-        layoutPlayerFooter = findViewById(R.id.layoutPlayerFooter);
-        tvFooterMusica = findViewById(R.id.tvFooterMusica);
-        btnPlayPauseFooter = findViewById(R.id.btnPlayPauseFooter);
-
-        // ✅ Adicionar estes:
-        btnNextFooter = findViewById(R.id.btnNextFooter);
-        btnPrevFooter = findViewById(R.id.btnPrevFooter);
-        btnStopFooter = findViewById(R.id.btnStopFooter);
-
-        if (btnPlayPauseFooter != null) {
-            btnPlayPauseFooter.setOnClickListener(v -> {
-                if (musicService != null) {
-                    if (musicService.isPlaying()) musicService.pause();
-                    else musicService.play();
-                }
-            });
-        }
-
-        // ✅ Listeners globais — funcionam em qualquer Activity filha
-        if (btnNextFooter != null) {
-            btnNextFooter.setOnClickListener(v -> {
-                if (musicService != null) musicService.next();
-            });
-        }
-
-        if (btnPrevFooter != null) {
-            btnPrevFooter.setOnClickListener(v -> {
-                if (musicService != null) musicService.previous();
-            });
-        }
-
-        if (btnStopFooter != null) {
-            btnStopFooter.setOnClickListener(v -> {
-                if (musicService != null) musicService.stop();
-            });
-        }
-
-        seekBarFooter = findViewById(R.id.seekBarFooter);
-        if (seekBarFooter != null) {
-            seekBarFooter.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-                @Override
-                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                    if (fromUser && musicService != null) {
-                        long dur = musicService.getDuration();
-                        if (dur > 0) musicService.seekTo((dur * progress) / 100);
-                    }
-                }
-                @Override public void onStartTrackingTouch(SeekBar seekBar) {}
-                @Override public void onStopTrackingTouch(SeekBar seekBar) {}
-            });
-        }
-
-        btnRepeatFooter = findViewById(R.id.btnRepeatFooter);
-        if (btnRepeatFooter != null) {
-            btnRepeatFooter.setOnClickListener(v -> {
-                if (musicService != null) {
-                    musicService.toggleRepeatMode();
-                    atualizarIconeRepeat();
-                }
-            });
-        }
-    }
-
     private void logout() {
         new AlertDialog.Builder(this)
                 .setTitle("Sair da conta")
@@ -226,111 +73,5 @@ public class BaseActivity extends AppCompatActivity {
                 })
                 .setNegativeButton("Cancelar", (dialog, which) -> dialog.dismiss())
                 .show();
-    }
-
-    private final ServiceConnection connection = new ServiceConnection() {
-
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            MusicService.LocalBinder binder = (MusicService.LocalBinder) service;
-            musicService = binder.getService();
-            isBound = true;
-
-            musicService.addCallback(playerCallback);
-            runOnUiThread(() -> {
-                atualizarFooterGlobal();
-
-                // 🔥 GARANTE que o loop começa SEMPRE
-                seekHandler.removeCallbacks(updateSeekFooterRunnable);
-                seekHandler.post(updateSeekFooterRunnable);
-            });
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            isBound = false;
-            musicService = null;
-        }
-    };
-
-    protected void mostrarFooterPlayer() {
-        if (layoutFooterNormal != null) layoutFooterNormal.setVisibility(View.GONE);
-        if (layoutPlayerFooter != null) layoutPlayerFooter.setVisibility(View.VISIBLE);
-    }
-
-    protected void esconderFooterPlayer() {
-        if (layoutFooterNormal != null) layoutFooterNormal.setVisibility(View.VISIBLE);
-        if (layoutPlayerFooter != null) layoutPlayerFooter.setVisibility(View.GONE);
-    }
-
-    // Sincroniza o footer ao conectar ou ao voltar para qualquer tela
-    protected void atualizarFooterGlobal() {
-
-        if (layoutFooterNormal == null || layoutPlayerFooter == null
-                || tvFooterMusica == null || btnPlayPauseFooter == null) {
-            return;
-        }
-
-        if (musicService == null || musicService.getPlayer() == null) return;
-
-        Player player = musicService.getPlayer();
-
-        if (player.getMediaItemCount() > 0) {
-            mostrarFooterPlayer();
-
-            String nome = musicService.getNomeMusicaAtual();
-            if (nome != null) tvFooterMusica.setText(nome);
-
-            btnPlayPauseFooter.setImageResource(
-                    player.isPlaying()
-                            ? android.R.drawable.ic_media_pause
-                            : android.R.drawable.ic_media_play
-            );
-
-            if (player.isPlaying()) {
-                seekHandler.removeCallbacks(updateSeekFooterRunnable);
-                seekHandler.post(updateSeekFooterRunnable);
-            }
-        } else {
-            esconderFooterPlayer();
-        }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (musicService != null) {
-            atualizarFooterGlobal();
-        }
-    }
-
-    private final Runnable updateSeekFooterRunnable = new Runnable() {
-        @Override
-        public void run() {
-            if (musicService != null) {
-                long pos = musicService.getCurrentPosition();
-                long dur = musicService.getDuration();
-                if (dur > 0 && seekBarFooter != null) {
-                    int progress = (int) (pos * 100 / dur);
-                    seekBarFooter.setProgress(progress);
-                }
-            }
-            seekHandler.postDelayed(this, 500);
-        }
-    };
-
-    protected void atualizarIconeRepeat() {
-        if (btnRepeatFooter == null || musicService == null) return;
-        int mode = musicService.getRepeatMode();
-        if (mode == Player.REPEAT_MODE_OFF) {
-            btnRepeatFooter.setAlpha(0.4f);
-            btnRepeatFooter.setImageResource(R.drawable.ic_repeat); // ícone normal
-        } else if (mode == Player.REPEAT_MODE_ONE) {
-            btnRepeatFooter.setAlpha(1f);
-            btnRepeatFooter.setImageResource(R.drawable.ic_repeat_one);
-        } else {
-            btnRepeatFooter.setAlpha(1f);
-            btnRepeatFooter.setImageResource(R.drawable.ic_repeat);
-        }
     }
 }

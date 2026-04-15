@@ -1,4 +1,4 @@
-package com.example.snfin.views;
+package com.example.snfin.models.lancamento;
 
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -9,8 +9,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.appml.R;
-import com.example.snfin.models.lancamento.Lancamento;
+import com.example.snfin.R;
 
 import java.util.List;
 
