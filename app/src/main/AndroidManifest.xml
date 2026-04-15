@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.appml">
+    package="com.example.snfin">
 
     <application
         android:allowBackup="true"
@@ -15,7 +15,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".LoadActivity"
+            android:name="com.example.snfin.LoadActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,18 +23,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" android:screenOrientation="sensorPortrait"/>
-        <activity android:name=".MainActivity" android:screenOrientation="sensorPortrait"/>
-        <activity android:name=".views.EscalasActivity" android:screenOrientation="sensorPortrait"/>
-        <activity android:name=".views.EscalaDetalheActivity" android:screenOrientation="sensorPortrait"/>
-        <activity android:name=".views.MinhasEscalasActivity" android:screenOrientation="sensorPortrait"/>
-        <activity android:name=".views.MusicasActivity" android:screenOrientation="sensorPortrait"/>
-        <activity android:name=".views.MusicaDetalheActivity" android:screenOrientation="sensorPortrait"/>
-        <activity android:name=".views.MensalidadeActivity"
+        <activity android:name="com.example.snfin.LoginActivity" android:screenOrientation="sensorPortrait"/>
+        <activity android:name="com.example.snfin.MainActivity" android:screenOrientation="sensorPortrait"/>
+        <activity android:name="com.example.snfin.views.EscalasActivity" android:screenOrientation="sensorPortrait"/>
+        <activity android:name="com.example.snfin.views.EscalaDetalheActivity" android:screenOrientation="sensorPortrait"/>
+        <activity android:name="com.example.snfin.views.MinhasEscalasActivity" android:screenOrientation="sensorPortrait"/>
+        <activity android:name="com.example.snfin.views.MusicasActivity" android:screenOrientation="sensorPortrait"/>
+        <activity android:name="com.example.snfin.views.MusicaDetalheActivity" android:screenOrientation="sensorPortrait"/>
+        <activity android:name="com.example.snfin.views.MensalidadeActivity"
             android:exported="false" />
 
         <service
-            android:name=".services.MusicService"
+            android:name="com.example.snfin.services.MusicService"
             android:foregroundServiceType="mediaPlayback"
             android:exported="true">
             <intent-filter>

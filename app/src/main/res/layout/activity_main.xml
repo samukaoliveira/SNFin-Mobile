@@ -1,273 +1,116 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/cinza_bg"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
     <!-- HEADER -->
-    <include
-        android:id="@+id/header_layout"
-        layout="@layout/header"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+    <RelativeLayout
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <!-- NAV -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/nav_layout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:background="@android:color/white"
+        <ImageButton
+            android:id="@+id/btnPrev"
+            android:src="@android:drawable/ic_media_previous"
+            android:background="@android:color/transparent"
+            android:layout_alignParentStart="true"/>
+
+        <TextView
+            android:id="@+id/tvCompetencia"
+            android:text="Abr/2026"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/verde_principal"
+            android:layout_centerInParent="true"/>
+
+        <ImageButton
+            android:id="@+id/btnNext"
+            android:src="@android:drawable/ic_media_next"
+            android:background="@android:color/transparent"
+            android:layout_toEndOf="@id/tvCompetencia"/>
+
+        <Button
+            android:id="@+id/btnLogout"
+            android:text="Sair"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/cinza_texto"
+            android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
+
+    <!-- BOTÃO -->
+    <Button
+        android:id="@+id/btnNovo"
+        android:text="➕ Novo Lançamento"
+        android:backgroundTint="@color/verde_claro"
+        android:textColor="@android:color/white"
+        android:layout_margin="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <!-- CARDS -->
+    <GridLayout
+        android:columnCount="2"
         android:padding="8dp"
-        app:layout_constraintTop_toBottomOf="@id/header_layout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <!-- CONTEÚDO -->
-    <ScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:paddingTop="50dp"
-        android:fillViewport="true"
-        android:scrollbars="none"
-        app:layout_constraintTop_toBottomOf="@id/nav_layout"
-        app:layout_constraintBottom_toTopOf="@id/footer_layout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        <!-- CARD TEMPLATE -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_margin="8dp"
+            card_view:cardCornerRadius="12dp"
+            card_view:cardElevation="8dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp">
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <!-- LINHA 1 -->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_escalas"
-                android:layout_width="0dp"
-                android:layout_height="140dp"
-                android:layout_margin="6dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?attr/selectableItemBackground"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="6dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/card_membros"
-                app:layout_constraintWidth_percent="0.48">
+                <TextView
+                    android:text="Saldo em Caixa"
+                    android:textColor="#666"
+                    android:textSize="13sp"/>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tvSaldoCaixa"
+                    android:text="R$ 0,00"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/verde_claro"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/escalas"
-                        android:textColor="@color/primary"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+        <!-- DUPLICAR PARA OUTROS CARDS -->
+        <!-- saldo previsto -->
+        <!-- receitas -->
+        <!-- despesas -->
 
-                    <ImageView
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:layout_marginTop="8dp"
-                        android:src="@drawable/to_do_list" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
+    </GridLayout>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_membros"
-                android:layout_width="0dp"
-                android:layout_height="140dp"
-                android:layout_margin="6dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="6dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@id/card_escalas"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintWidth_percent="0.48">
+    <!-- HEADER DA TABELA -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:background="@color/verde_principal"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical">
+        <TextView android:text="Data" android:textColor="@android:color/white" android:layout_weight="1"/>
+        <TextView android:text="Lançamento" android:textColor="@android:color/white" android:layout_weight="2"/>
+        <TextView android:text="Valor" android:textColor="@android:color/white" android:layout_weight="1"/>
+        <TextView android:text="Status" android:textColor="@android:color/white" android:layout_weight="1"/>
+        <TextView android:text="Ações" android:textColor="@android:color/white" android:layout_weight="1"/>
+    </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/membros"
-                        android:textColor="@color/primary"
-                        android:textSize="16sp"
-                        android:textStyle="bold"/>
+    <!-- LISTA -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerLancamentos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
-                    <ImageView
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:layout_marginTop="8dp"
-                        android:src="@drawable/profile_gray"/>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <!-- LINHA 2 -->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_musicas"
-                android:layout_width="0dp"
-                android:layout_height="140dp"
-                android:layout_margin="6dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="6dp"
-                app:layout_constraintTop_toBottomOf="@id/card_escalas"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/card_funcoes"
-                app:layout_constraintWidth_percent="0.48">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/musicas"
-                        android:textColor="@color/primary"
-                        android:textSize="16sp"
-                        android:textStyle="bold"/>
-
-                    <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:layout_marginTop="8dp"
-                        android:src="@drawable/music"/>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_funcoes"
-                android:layout_width="0dp"
-                android:layout_height="140dp"
-                android:layout_margin="6dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="6dp"
-                app:layout_constraintTop_toBottomOf="@id/card_membros"
-                app:layout_constraintStart_toEndOf="@id/card_musicas"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintWidth_percent="0.48">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/funcoes"
-                        android:textColor="@color/primary"
-                        android:textSize="16sp"
-                        android:textStyle="bold"/>
-
-                    <ImageView
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:layout_marginTop="8dp"
-                        android:src="@drawable/skills_gray"/>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <!-- LINHA 3 -->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_mensalidades"
-                android:layout_width="0dp"
-                android:layout_height="140dp"
-                android:layout_margin="6dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="6dp"
-                app:layout_constraintTop_toBottomOf="@id/card_musicas"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/card_relatorios"
-                app:layout_constraintWidth_percent="0.48">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/mensalidades"
-                        android:textColor="@color/primary"
-                        android:textSize="16sp"
-                        android:textStyle="bold"/>
-
-                    <ImageView
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:layout_marginTop="8dp"
-                        android:src="@drawable/cifrao"/>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_relatorios"
-                android:layout_width="0dp"
-                android:layout_height="140dp"
-                android:layout_margin="6dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="6dp"
-                app:layout_constraintTop_toBottomOf="@id/card_funcoes"
-                app:layout_constraintStart_toEndOf="@id/card_mensalidades"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintWidth_percent="0.48">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/relatorios"
-                        android:textColor="@color/primary"
-                        android:textSize="16sp"
-                        android:textStyle="bold"/>
-
-                    <ImageView
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:layout_marginTop="8dp"
-                        android:src="@drawable/analysis_gray"/>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
-
-    <!-- FOOTER -->
-    <include
-        android:id="@+id/footer_layout"
-        layout="@layout/footer"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

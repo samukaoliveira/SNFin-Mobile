@@ -1,0 +1,65 @@
+// CarregaEscalas.java  (renomeei para não ter o "rr" duplicado)
+package com.example.snfin.views;
+
+import android.app.Activity;
+import android.util.Log;
+import android.widget.Toast;
+
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.snfin.models.escala.EscalaSimples;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+/**
+ * Utilitário para popular um RecyclerView com uma lista de EscalaSimples.
+ *
+ * Exemplo de uso:
+ *     new CarregaEscalas().carregar(
+ *         this,
+ *         recyclerView,
+ *         apiService.getListaEscalas(),   // OU getMinhasEscalas()
+ *         this                           // se a Activity implementar OnEscalaClickListener
+ *     );
+ */
+public class CarregaEscalas {
+
+    public void carregar(
+            Activity context,
+            RecyclerView recyclerView,
+            Call<List<EscalaSimples>> chamada,
+            EscalasAdapter.OnEscalaClickListener listener // pode ser null
+    ) {
+        chamada.enqueue(new Callback<List<EscalaSimples>>() {
+            @Override
+            public void onResponse(Call<List<EscalaSimples>> call,
+                                   Response<List<EscalaSimples>> response) {
+
+                Log.d("API_DEBUG", "HTTP CODE: " + response.code());
+                Log.d("API_DEBUG", "BODY: " + response.body());
+                Log.d("API_DEBUG", "ERROR BODY: " + response.errorBody());
+
+                if (response.isSuccessful() && response.body() != null) {
+                    List<EscalaSimples> escalas = response.body();
+                    EscalasAdapter adapter = new EscalasAdapter(escalas, listener);
+                    recyclerView.setAdapter(adapter);
+                } else {
+                    Toast.makeText(context,
+                            "Falha ao carregar escalas",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<EscalaSimples>> call, Throwable t) {
+                Toast.makeText(context,
+                        "Erro: " + t.getMessage(),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+}

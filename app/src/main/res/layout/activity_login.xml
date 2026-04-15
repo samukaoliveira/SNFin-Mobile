@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="76dp"
         android:text="Email"
-        android:textColor="@color/blue"
+        android:textColor="@color/verde_agua"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:text="Senha"
-        android:textColor="@color/blue"
+        android:textColor="@color/verde_agua"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -83,6 +83,8 @@
         android:layout_height="63dp"
         android:layout_marginBottom="100dp"
         android:padding="16dp"
+        android:backgroundTint="@color/verde_principal"
+        android:textColor="@android:color/white"
         android:text="Entrar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -98,7 +100,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo512" />
+        app:srcCompat="@drawable/logo_snfin" />
 
     <TextView
         android:id="@+id/flashMessage"
@@ -106,7 +108,7 @@
         android:layout_height="32dp"
         android:ems="10"
         android:textAlignment="center"
-        android:textColor="@color/red"
+        android:textColor="@color/design_default_color_error"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/emailLabel"
         app:layout_constraintEnd_toEndOf="parent"

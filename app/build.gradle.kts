@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.snfin"
+    namespace = "com.example.snfin"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.snfin"
+        applicationId = "com.example.snfin"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
