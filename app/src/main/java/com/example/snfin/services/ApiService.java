@@ -23,8 +23,8 @@ public interface ApiService {
     @POST("login/")
     Call<LoginResponse> login(@Body UsuarioLoginRequest request);
 
-    @GET("dashboard/")
-    Call<DashboardResponse> getDashboard();
+    @GET("home/")
+    Call<DashboardResponse> getHome();
 
     @GET("escalas/")
     Call<List<EscalaSimples>> getListaEscalas();

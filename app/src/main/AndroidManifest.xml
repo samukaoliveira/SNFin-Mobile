@@ -25,13 +25,6 @@
         </activity>
         <activity android:name="com.example.snfin.LoginActivity" android:screenOrientation="sensorPortrait"/>
         <activity android:name="com.example.snfin.MainActivity" android:screenOrientation="sensorPortrait"/>
-        <activity android:name="com.example.snfin.views.EscalasActivity" android:screenOrientation="sensorPortrait"/>
-        <activity android:name="com.example.snfin.views.EscalaDetalheActivity" android:screenOrientation="sensorPortrait"/>
-        <activity android:name="com.example.snfin.views.MinhasEscalasActivity" android:screenOrientation="sensorPortrait"/>
-        <activity android:name="com.example.snfin.views.MusicasActivity" android:screenOrientation="sensorPortrait"/>
-        <activity android:name="com.example.snfin.views.MusicaDetalheActivity" android:screenOrientation="sensorPortrait"/>
-        <activity android:name="com.example.snfin.views.MensalidadeActivity"
-            android:exported="false" />
 
         <service
             android:name="com.example.snfin.services.MusicService"

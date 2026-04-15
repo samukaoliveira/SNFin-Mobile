@@ -2,6 +2,6 @@
     <gradient
         android:angle="135"
         android:endColor="#0B1E33"
-        android:startColor="#0D6EFD"
+        android:startColor="#19A201"
         android:type="linear"/>
 </shape>

@@ -5,7 +5,8 @@
     android:orientation="vertical"
     android:background="@color/cinza_bg"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingTop="50dp">
 
     <!-- ===== HEADER ===== -->
     <RelativeLayout
@@ -13,14 +14,53 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <!-- LOGO (canto esquerdo) -->
+        <ImageButton
+            android:id="@+id/btnHome"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/logo_mini"
+            android:background="@android:color/transparent"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"/>
+
+        <!-- BOTÃO VOLTAR -->
         <ImageButton
             android:id="@+id/btnPrev"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@android:drawable/ic_media_previous"
+            android:layout_marginLeft="80dp"
+            android:src="@drawable/ic_arrow_back"
+            android:tint="@color/verde_principal"
             android:background="@android:color/transparent"
-            android:layout_alignParentStart="true"/>
+            android:layout_toEndOf="@id/btnHome"
+            android:layout_marginStart="8dp"
+            android:layout_centerVertical="true"/>
 
+        <!-- LOGOUT (canto direito) -->
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sair"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/cinza_texto"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"/>
+
+        <!-- BOTÃO PRÓXIMO -->
+        <ImageButton
+            android:id="@+id/btnNext"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_arrow_forward"
+            android:tint="@color/verde_principal"
+            android:background="@android:color/transparent"
+            android:layout_toStartOf="@id/btnLogout"
+            android:layout_marginEnd="8dp"
+            android:layout_centerVertical="true"/>
+
+        <!-- TEXTO CENTRAL -->
         <TextView
             android:id="@+id/tvCompetencia"
             android:layout_width="wrap_content"
@@ -31,22 +71,6 @@
             android:textColor="@color/verde_principal"
             android:layout_centerInParent="true"/>
 
-        <ImageButton
-            android:id="@+id/btnNext"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@android:drawable/ic_media_next"
-            android:background="@android:color/transparent"
-            android:layout_toEndOf="@id/tvCompetencia"/>
-
-        <Button
-            android:id="@+id/btnLogout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sair"
-            android:textColor="@android:color/white"
-            android:backgroundTint="@color/cinza_texto"
-            android:layout_alignParentEnd="true"/>
     </RelativeLayout>
 
     <!-- ===== BOTÃO NOVO ===== -->

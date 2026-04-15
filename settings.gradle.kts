@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "appML"
+rootProject.name = "SNFin"
 include(":app")
  

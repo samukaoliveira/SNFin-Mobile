@@ -8,38 +8,52 @@
 
     <TextView
         android:id="@+id/tvData"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="01/04"
         android:textSize="13sp"/>
 
     <TextView
         android:id="@+id/tvDescricao"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_weight="2"
         android:text="Cartão Nubank"/>
 
     <TextView
         android:id="@+id/tvValor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="R$ -100"
         android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/tvStatus"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="Pago"/>
 
     <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/btnPagar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Pagar"
             android:textSize="10sp"
             android:backgroundTint="@color/verde_claro"/>
 
         <Button
             android:id="@+id/btnFatura"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Fatura"
             android:textSize="10sp"
             android:backgroundTint="@color/cinza_bg"/>

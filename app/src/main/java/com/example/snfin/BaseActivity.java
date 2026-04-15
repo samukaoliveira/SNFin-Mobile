@@ -14,7 +14,7 @@ import com.google.android.material.button.MaterialButton;
 
 public class BaseActivity extends AppCompatActivity {
 
-    protected MaterialButton btnHome;
+    protected ImageButton btnHome;
     protected MaterialButton btnLogout;
 
     @Override
