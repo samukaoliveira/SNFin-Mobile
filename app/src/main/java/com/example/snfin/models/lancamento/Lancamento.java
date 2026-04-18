@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class Lancamento {
 
+    private Integer id;
     private String descricao;
     private String data;
     private double valor;
@@ -33,6 +34,9 @@ public class Lancamento {
 
     // 🔥 GETTERS
 
+    public Integer getId() {
+        return id;
+    }
     public String getDescricao() {
         return descricao;
     }

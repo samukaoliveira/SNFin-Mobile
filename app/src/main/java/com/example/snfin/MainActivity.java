@@ -49,7 +49,7 @@ public class MainActivity extends BaseActivity {
     private ProgressBar progressBar;
 
     private ApiService apiService;
-    private ActivityResultLauncher<Intent> launcher;
+    public ActivityResultLauncher<Intent> launcher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +73,7 @@ public class MainActivity extends BaseActivity {
         recyclerView = findViewById(R.id.recyclerLancamentos);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter = new LancamentoAdapter(new ArrayList<>());
+        adapter = new LancamentoAdapter(this, new ArrayList<>());
         recyclerView.setAdapter(adapter);
 
         btnNovo = findViewById(R.id.btnNovo);

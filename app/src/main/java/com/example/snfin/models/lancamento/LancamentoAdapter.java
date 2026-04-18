@@ -1,14 +1,19 @@
 package com.example.snfin.models.lancamento;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.snfin.LancamentoFormActivity;
+import com.example.snfin.MainActivity;
 import com.example.snfin.R;
 
 import java.util.List;
@@ -16,9 +21,11 @@ import java.util.List;
 public class LancamentoAdapter extends RecyclerView.Adapter<LancamentoAdapter.ViewHolder> {
 
     private List<Lancamento> lista;
+    private Context context;
 
-    public LancamentoAdapter(List<Lancamento> lista) {
+    public LancamentoAdapter(Context context, List<Lancamento> lista) {
         this.lista = lista;
+        this.context = context;
     }
 
     public void updateList(List<Lancamento> novaLista) {
@@ -59,6 +66,30 @@ public class LancamentoAdapter extends RecyclerView.Adapter<LancamentoAdapter.Vi
         holder.btnFatura.setOnClickListener(v -> {
             // TODO: abrir tela fatura
         });
+
+        // 🔥 CLICK NO ITEM → EDITAR
+        holder.btnEditar.setOnClickListener(v -> abrirEdicao(l));
+    }
+
+    private void abrirEdicao(Lancamento l) {
+
+        Intent intent = new Intent(context, LancamentoFormActivity.class);
+
+        intent.putExtra("id", l.getId());
+        intent.putExtra("descricao", l.getDescricao());
+        intent.putExtra("valor", l.getValor());
+        intent.putExtra("data", l.getData());
+        intent.putExtra("pago", l.isPago());
+        intent.putExtra("natureza", l.getNatureza());
+        intent.putExtra("fixo", l.getFixo());
+        intent.putExtra("parcelas", l.getParcelas());
+
+        // 🔥 ESSENCIAL: usar launcher da MainActivity
+        if (context instanceof MainActivity) {
+            ((MainActivity) context).launcher.launch(intent);
+        } else {
+            context.startActivity(intent); // fallback
+        }
     }
 
     @Override
@@ -66,11 +97,10 @@ public class LancamentoAdapter extends RecyclerView.Adapter<LancamentoAdapter.Vi
         return lista != null ? lista.size() : 0;
     }
 
-    // 🔥 VIEW HOLDER (faltava isso)
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvData, tvDescricao, tvValor, tvStatus;
-        Button btnPagar, btnFatura;
+        Button btnPagar, btnFatura, btnEditar;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -81,6 +111,7 @@ public class LancamentoAdapter extends RecyclerView.Adapter<LancamentoAdapter.Vi
             tvStatus = itemView.findViewById(R.id.tvStatus);
 
             btnPagar = itemView.findViewById(R.id.btnPagar);
+            btnEditar = itemView.findViewById(R.id.btnEditar);
             btnFatura = itemView.findViewById(R.id.btnFatura);
         }
     }

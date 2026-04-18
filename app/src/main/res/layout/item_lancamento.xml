@@ -51,6 +51,15 @@
             android:backgroundTint="@color/verde_claro"/>
 
         <Button
+            android:id="@+id/btnEditar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Editar"
+            android:textSize="10sp"
+            android:backgroundTint="@color/amarelo"
+            android:textColor="@android:color/white"/>
+
+        <Button
             android:id="@+id/btnFatura"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

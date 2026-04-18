@@ -140,6 +140,7 @@ public class LancamentoFormActivity extends AppCompatActivity {
         } else {
             spEscopo.setVisibility(View.GONE);
         }
+        Log.d("EDIT", "ID recebido: " + lancamentoId);
     }
 
     private void salvar() {
@@ -178,6 +179,7 @@ public class LancamentoFormActivity extends AppCompatActivity {
             } else {
                 call = api.atualizarLancamento(token, lancamentoId, req);
             }
+            Log.d("API", "Modo: " + (lancamentoId == -1 ? "CREATE" : "UPDATE"));
 
             call.enqueue(new Callback<Void>() {
                 @Override
