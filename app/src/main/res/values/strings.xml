@@ -1,18 +1,7 @@
 <resources>
-    <string name="app_name">appML</string>
-    <string name="ministerio_louvor_iec">Ministério de Louvor - IEC</string>
+    <string name="app_name">SNFin</string>
     <string name="home">Home</string>
     <string name="menu_toggle">Alternar Menu</string>
-    <string name="escalas">Escalas</string>
-    <string name="desc_escalas">Ícone de lista de tarefas para Escalas</string>
-    <string name="membros">Membros</string>
-    <string name="desc_membros">Ícone de grupo de pessoas para Membros</string>
-    <string name="musicas">Músicas</string>
-    <string name="desc_musicas">Ícone de nota musical para Músicas</string>
-    <string name="funcoes">Funções</string>
-    <string name="desc_funcoes">Ícone de gráfico de barras para Funções</string>
-    <string name="mensalidades">Mensalidades</string>
-    <string name="desc_mensalidades">Ícone com cifrão para Mensalidades</string>
     <string name="relatorios">Relatórios</string>
     <string name="desc_relatorios">Ícone de gráfico de análise para Relatórios</string>
     <string name="snfin">SNFin</string>

@@ -186,6 +186,7 @@ public class LancamentoFormActivity extends AppCompatActivity {
                     if (response.isSuccessful()) {
                         Toast.makeText(LancamentoFormActivity.this,
                                 "Salvo com sucesso!", Toast.LENGTH_SHORT).show();
+                        setResult(RESULT_OK);
                         finish();
                     } else {
                         try {

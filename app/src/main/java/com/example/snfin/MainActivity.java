@@ -9,6 +9,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -47,6 +49,7 @@ public class MainActivity extends BaseActivity {
     private ProgressBar progressBar;
 
     private ApiService apiService;
+    private ActivityResultLauncher<Intent> launcher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,10 +85,19 @@ public class MainActivity extends BaseActivity {
 
         btnNovo.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, LancamentoFormActivity.class);
-            startActivity(intent);
+            launcher.launch(intent);
         });
 
         carregarDashboard();
+
+        launcher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK) {
+                        carregarDashboard(); // 🔥 sua função que chama API da home
+                    }
+                }
+        );
     }
 
     private void carregarDashboard() {
