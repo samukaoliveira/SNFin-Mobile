@@ -1,8 +1,10 @@
 package com.example.snfin;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +39,8 @@ public class MainActivity extends BaseActivity {
     private TextView tvReceitasRealizadas;
     private TextView tvDespesasRealizadas;
 
+    private Button btnNovo;
+
     private RecyclerView recyclerView;
     private LancamentoAdapter adapter;
 
@@ -69,10 +73,17 @@ public class MainActivity extends BaseActivity {
         adapter = new LancamentoAdapter(new ArrayList<>());
         recyclerView.setAdapter(adapter);
 
+        btnNovo = findViewById(R.id.btnNovo);
+
         // ===== API =====
         apiService = RetrofitInstance
                 .getRetrofitInstance(this)
                 .create(ApiService.class);
+
+        btnNovo.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, LancamentoFormActivity.class);
+            startActivity(intent);
+        });
 
         carregarDashboard();
     }

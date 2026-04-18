@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/branco"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:paddingBottom="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- TÍTULO -->
+        <TextView
+            android:id="@+id/tvTitulo"
+            android:text="Novo Lançamento"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/verde_principal"
+            android:layout_marginBottom="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!-- DESCRIÇÃO -->
+        <EditText
+            android:id="@+id/etDescricao"
+            android:hint="Descrição"
+            android:layout_marginBottom="14dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- VALOR -->
+        <EditText
+            android:id="@+id/etValor"
+            android:hint="Valor"
+            android:inputType="numberDecimal"
+            android:layout_marginBottom="14dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- DATA -->
+        <EditText
+            android:id="@+id/etData"
+            android:hint="Selecionar data"
+            android:focusable="false"
+            android:clickable="true"
+            android:layout_marginBottom="14dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- LABEL NATUREZA -->
+        <TextView
+            android:text="Natureza"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!-- NATUREZA -->
+        <Spinner
+            android:id="@+id/spNatureza"
+            android:layout_marginBottom="14dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- LABEL REPETIÇÃO -->
+        <TextView
+            android:text="Repetição"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!-- REPETIÇÃO -->
+        <Spinner
+            android:id="@+id/spFixo"
+            android:layout_marginBottom="14dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- PARCELAS -->
+        <EditText
+            android:id="@+id/etParcelas"
+            android:hint="Parcelas"
+            android:inputType="number"
+            android:visibility="gone"
+            android:layout_marginBottom="14dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- ESCOPO -->
+        <Spinner
+            android:id="@+id/spEscopo"
+            android:visibility="gone"
+            android:layout_marginBottom="14dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- CHECKBOX -->
+        <CheckBox
+            android:id="@+id/cbPago"
+            android:text="Já pago"
+            android:layout_marginBottom="14dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!-- BOTÕES -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:gravity="end"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btnCancelar"
+                android:text="Cancelar"
+                android:backgroundTint="@color/cinza_texto"
+                android:textColor="@android:color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/btnSalvar"
+                android:text="Salvar"
+                android:backgroundTint="@color/verde_principal"
+                android:textColor="@android:color/white"
+                android:layout_marginStart="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

@@ -25,6 +25,7 @@
         </activity>
         <activity android:name="com.example.snfin.LoginActivity" android:screenOrientation="sensorPortrait"/>
         <activity android:name="com.example.snfin.MainActivity" android:screenOrientation="sensorPortrait"/>
+        <activity android:name=".LancamentoFormActivity" />
 
         <service
             android:name="com.example.snfin.services.MusicService"
