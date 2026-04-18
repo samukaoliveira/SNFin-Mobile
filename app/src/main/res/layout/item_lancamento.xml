@@ -1,71 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:padding="10dp"
     android:background="@color/branco"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <!-- DATA -->
     <TextView
         android:id="@+id/tvData"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="1.7"
         android:text="01/04"
-        android:textSize="13sp"/>
+        android:textSize="13sp" />
 
+    <!-- DESCRIÇÃO -->
     <TextView
         android:id="@+id/tvDescricao"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:text="Cartão Nubank"/>
+        android:layout_weight="5"
+        android:text="Cartão Nubank" />
 
+    <!-- VALOR -->
     <TextView
         android:id="@+id/tvValor"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="1.5"
         android:text="R$ -100"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tvStatus"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Pago"/>
+    <!-- STATUS -->
 
+    <ImageButton
+        android:id="@+id/btnPagar"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_weight="0.8"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_pagar"
+        android:contentDescription="Pagar"
+        app:tint="@color/verde_claro" />
+
+    <!-- AÇÕES -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="horizontal">
+        android:layout_weight="2"
+        android:orientation="horizontal"
+        android:gravity="end">
 
-        <Button
-            android:id="@+id/btnPagar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pagar"
-            android:textSize="10sp"
-            android:backgroundTint="@color/verde_claro"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/btnEditar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Editar"
-            android:textSize="10sp"
-            android:backgroundTint="@color/amarelo"
-            android:textColor="@android:color/white"/>
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="2dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_edit"
+            android:contentDescription="Editar"
+            app:tint="@color/amarelo" />
 
-        <Button
-            android:id="@+id/btnFatura"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Fatura"
-            android:textSize="10sp"
-            android:backgroundTint="@color/cinza_bg"/>
+        <ImageButton
+            android:id="@+id/btnDelete"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="2dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_delete"
+            android:contentDescription="Excluir"
+            app:tint="@color/despesa" />
+
     </LinearLayout>
 
 </LinearLayout>

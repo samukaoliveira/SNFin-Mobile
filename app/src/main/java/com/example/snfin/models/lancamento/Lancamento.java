@@ -45,6 +45,10 @@ public class Lancamento {
         return formatarData(data);
     }
 
+    public String getDataCurta() {
+        return formatarDataCurta(data);
+    }
+
     public double getValor() {
         return valor;
     }
@@ -79,6 +83,15 @@ public class Lancamento {
         try {
             String[] partes = data.split("-");
             return partes[2] + "/" + partes[1] + "/" + partes[0];
+        } catch (Exception e) {
+            return data;
+        }
+    }
+
+    private String formatarDataCurta(String data) {
+        try {
+            String[] partes = data.split("-");
+            return partes[2] + "/" + partes[1];
         } catch (Exception e) {
             return data;
         }

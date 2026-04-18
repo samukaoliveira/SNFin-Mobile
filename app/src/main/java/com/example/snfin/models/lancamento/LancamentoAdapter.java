@@ -2,21 +2,32 @@ package com.example.snfin.models.lancamento;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.snfin.LancamentoFormActivity;
 import com.example.snfin.MainActivity;
 import com.example.snfin.R;
+import com.example.snfin.services.ApiService;
+import com.example.snfin.services.RetrofitInstance;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LancamentoAdapter extends RecyclerView.Adapter<LancamentoAdapter.ViewHolder> {
 
@@ -45,7 +56,7 @@ public class LancamentoAdapter extends RecyclerView.Adapter<LancamentoAdapter.Vi
 
         Lancamento l = lista.get(position);
 
-        holder.tvData.setText(l.getData());
+        holder.tvData.setText(l.getDataCurta());
         holder.tvDescricao.setText(l.getDescricao());
         holder.tvValor.setText("R$ " + l.getValor());
 
@@ -55,20 +66,80 @@ public class LancamentoAdapter extends RecyclerView.Adapter<LancamentoAdapter.Vi
             holder.tvValor.setTextColor(Color.parseColor("#43a047"));
         }
 
-        holder.tvStatus.setText(l.isPago() ? "Pago" : "Pendente");
+        if (l.isPago()) {
+            holder.btnPagar.setColorFilter(
+                    holder.itemView.getContext().getColor(R.color.verde_claro)
+            );
+        } else {
+            holder.btnPagar.setColorFilter(
+                    holder.itemView.getContext().getColor(R.color.cinza_texto)
+            );
+        }
 
-        holder.btnPagar.setVisibility(l.isPago() ? View.GONE : View.VISIBLE);
+//        holder.btnPagar.setVisibility(l.isPago() ? View.GONE : View.VISIBLE);
 
         holder.btnPagar.setOnClickListener(v -> {
             // TODO: chamar API pagar
         });
 
-        holder.btnFatura.setOnClickListener(v -> {
-            // TODO: abrir tela fatura
-        });
+//        holder.btnFatura.setOnClickListener(v -> {
+//            // TODO: abrir tela fatura
+//        });
 
         // 🔥 CLICK NO ITEM → EDITAR
         holder.btnEditar.setOnClickListener(v -> abrirEdicao(l));
+
+        holder.btnDelete.setOnClickListener(v -> {
+
+            new AlertDialog.Builder(v.getContext())
+                    .setTitle("Confirmar")
+                    .setMessage("Deseja excluir este lançamento?")
+                    .setPositiveButton("Sim", (dialog, which) -> {
+
+                        int id = l.getId();
+
+                        ApiService api = RetrofitInstance
+                                .getRetrofitInstance(v.getContext())
+                                .create(ApiService.class);
+
+                        SharedPreferences sharedPref = v.getContext()
+                                .getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
+
+                        String token = sharedPref.getString("auth_token", null);
+
+                        api.deletarLancamento("Token " + token, id)
+                                .enqueue(new Callback<Void>() {
+
+                                    @Override
+                                    public void onResponse(Call<Void> call, Response<Void> response) {
+                                        if (response.isSuccessful()) {
+
+                                            Toast.makeText(v.getContext(),
+                                                    "Deletado com sucesso",
+                                                    Toast.LENGTH_SHORT).show();
+
+                                            lista.remove(holder.getAdapterPosition());
+                                            notifyItemRemoved(holder.getAdapterPosition());
+
+                                        } else {
+                                            Toast.makeText(v.getContext(),
+                                                    "Erro ao deletar",
+                                                    Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<Void> call, Throwable t) {
+                                        Toast.makeText(v.getContext(),
+                                                "Falha: " + t.getMessage(),
+                                                Toast.LENGTH_LONG).show();
+                                    }
+                                });
+
+                    })
+                    .setNegativeButton("Cancelar", null)
+                    .show();
+        });
     }
 
     private void abrirEdicao(Lancamento l) {
@@ -100,7 +171,9 @@ public class LancamentoAdapter extends RecyclerView.Adapter<LancamentoAdapter.Vi
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvData, tvDescricao, tvValor, tvStatus;
-        Button btnPagar, btnFatura, btnEditar;
+        Button btnFatura;
+
+        ImageButton  btnEditar, btnDelete, btnPagar;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -108,11 +181,10 @@ public class LancamentoAdapter extends RecyclerView.Adapter<LancamentoAdapter.Vi
             tvData = itemView.findViewById(R.id.tvData);
             tvDescricao = itemView.findViewById(R.id.tvDescricao);
             tvValor = itemView.findViewById(R.id.tvValor);
-            tvStatus = itemView.findViewById(R.id.tvStatus);
 
             btnPagar = itemView.findViewById(R.id.btnPagar);
             btnEditar = itemView.findViewById(R.id.btnEditar);
-            btnFatura = itemView.findViewById(R.id.btnFatura);
+            btnDelete = itemView.findViewById(R.id.btnDelete);
         }
     }
 }
