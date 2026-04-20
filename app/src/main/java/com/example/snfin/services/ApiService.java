@@ -21,6 +21,7 @@ import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiService {
 
@@ -28,7 +29,10 @@ public interface ApiService {
     Call<LoginResponse> login(@Body UsuarioLoginRequest request);
 
     @GET("home/")
-    Call<DashboardResponse> getHome();
+    Call<DashboardResponse> getHome(
+            @Query("mes") int mes,
+            @Query("ano") int ano
+    );
 
     @POST("lancamentos/")
     Call<Void> criarLancamento(

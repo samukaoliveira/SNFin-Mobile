@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +25,7 @@ import com.google.gson.Gson;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Locale;
 
 import retrofit2.Call;
@@ -51,10 +53,25 @@ public class MainActivity extends BaseActivity {
     private ApiService apiService;
     public ActivityResultLauncher<Intent> launcher;
 
+    private int mesAtual;
+    private int anoAtual;
+    private TextView tvCompetencia;
+    private ImageButton btnPrev, btnNext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Calendar calendar = Calendar.getInstance();
+        mesAtual = calendar.get(Calendar.MONTH) + 1; // 🔥 mês começa em 0
+        anoAtual = calendar.get(Calendar.YEAR);
+
+        tvCompetencia = findViewById(R.id.tvCompetencia);
+        btnPrev = findViewById(R.id.btnPrev);
+        btnNext = findViewById(R.id.btnNext);
+
+        atualizarCompetencia();
 
         Log.d(TAG, "onCreate iniciado");
 
@@ -88,6 +105,30 @@ public class MainActivity extends BaseActivity {
             launcher.launch(intent);
         });
 
+        btnPrev.setOnClickListener(v -> {
+            mesAtual--;
+
+            if (mesAtual < 1) {
+                mesAtual = 12;
+                anoAtual--;
+            }
+
+            atualizarCompetencia();
+            carregarDashboard();
+        });
+
+        btnNext.setOnClickListener(v -> {
+            mesAtual++;
+
+            if (mesAtual > 12) {
+                mesAtual = 1;
+                anoAtual++;
+            }
+
+            atualizarCompetencia();
+            carregarDashboard();
+        });
+
         carregarDashboard();
 
         launcher = registerForActivityResult(
@@ -100,13 +141,24 @@ public class MainActivity extends BaseActivity {
         );
     }
 
+    private void atualizarCompetencia() {
+
+        String[] meses = {
+                "Jan", "Fev", "Mar", "Abr", "Mai", "Jun",
+                "Jul", "Ago", "Set", "Out", "Nov", "Dez"
+        };
+
+        String texto = meses[mesAtual - 1] + "/" + anoAtual;
+        tvCompetencia.setText(texto);
+    }
+
     private void carregarDashboard() {
 
         Log.d(TAG, "Iniciando chamada da API /home/");
 
         mostrarLoading(true);
 
-        apiService.getHome().enqueue(new Callback<DashboardResponse>() {
+        apiService.getHome(mesAtual, anoAtual).enqueue(new Callback<DashboardResponse>() {
 
             @Override
             public void onResponse(Call<DashboardResponse> call, Response<DashboardResponse> response) {
