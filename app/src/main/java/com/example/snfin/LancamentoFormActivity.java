@@ -29,7 +29,7 @@ public class LancamentoFormActivity extends AppCompatActivity {
     private Button btnSalvar, btnCancelar;
     private TextView tvTitulo;
 
-    private Integer lancamentoId = null; // 🔥 controla edição
+    private Integer lancamentoId = -1; // 🔥 controla edição
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
