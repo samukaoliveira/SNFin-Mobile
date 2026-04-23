@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.snfin.CartaoDetalheActivity;
 import com.example.snfin.LancamentoFormActivity;
 import com.example.snfin.MainActivity;
 import com.example.snfin.R;
@@ -66,6 +67,7 @@ public class LancamentoAdapter extends RecyclerView.Adapter<LancamentoAdapter.Vi
             holder.tvValor.setTextColor(Color.parseColor("#43a047"));
         }
 
+        // ===== STATUS PAGAMENTO =====
         if (l.isPago()) {
             holder.btnPagar.setColorFilter(
                     holder.itemView.getContext().getColor(R.color.verde_claro)
@@ -76,70 +78,93 @@ public class LancamentoAdapter extends RecyclerView.Adapter<LancamentoAdapter.Vi
             );
         }
 
-//        holder.btnPagar.setVisibility(l.isPago() ? View.GONE : View.VISIBLE);
-
         holder.btnPagar.setOnClickListener(v -> {
-            // TODO: chamar API pagar
+            // TODO pagar
         });
 
-//        holder.btnFatura.setOnClickListener(v -> {
-//            // TODO: abrir tela fatura
-//        });
+        // =========================================
+        // 🔥 REGRA CORRETA (AGORA SIM)
+        // =========================================
+        boolean isCartao = "CARTAO".equals(l.getTipo());
 
-        // 🔥 CLICK NO ITEM → EDITAR
-        holder.btnEditar.setOnClickListener(v -> abrirEdicao(l));
+        if (isCartao) {
 
-        holder.btnDelete.setOnClickListener(v -> {
+            holder.btnEditar.setVisibility(View.GONE);
+            holder.btnDelete.setVisibility(View.GONE);
+            holder.btnPagar.setVisibility(View.GONE);
 
-            new AlertDialog.Builder(v.getContext())
-                    .setTitle("Confirmar")
-                    .setMessage("Deseja excluir este lançamento?")
-                    .setPositiveButton("Sim", (dialog, which) -> {
+            holder.btnFatura.setVisibility(View.VISIBLE);
 
-                        int id = l.getId();
+            holder.btnFatura.setOnClickListener(v -> {
+                Intent intent = new Intent(context, CartaoDetalheActivity.class);
 
-                        ApiService api = RetrofitInstance
-                                .getRetrofitInstance(v.getContext())
-                                .create(ApiService.class);
+                // 🔥 agora vem da API
+                intent.putExtra("cartaoId", l.getCartaoId());
 
-                        SharedPreferences sharedPref = v.getContext()
-                                .getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
+                context.startActivity(intent);
+            });
 
-                        String token = sharedPref.getString("auth_token", null);
+        } else {
 
-                        api.deletarLancamento("Token " + token, id)
-                                .enqueue(new Callback<Void>() {
+            holder.btnEditar.setVisibility(View.VISIBLE);
+            holder.btnDelete.setVisibility(View.VISIBLE);
+            holder.btnPagar.setVisibility(View.VISIBLE);
+            holder.btnFatura.setVisibility(View.GONE);
 
-                                    @Override
-                                    public void onResponse(Call<Void> call, Response<Void> response) {
-                                        if (response.isSuccessful()) {
+            holder.btnEditar.setOnClickListener(v -> abrirEdicao(l));
 
-                                            Toast.makeText(v.getContext(),
-                                                    "Deletado com sucesso",
-                                                    Toast.LENGTH_SHORT).show();
+            holder.btnDelete.setOnClickListener(v -> {
+                new AlertDialog.Builder(v.getContext())
+                        .setTitle("Confirmar")
+                        .setMessage("Deseja excluir este lançamento?")
+                        .setPositiveButton("Sim", (dialog, which) -> {
 
-                                            lista.remove(holder.getAdapterPosition());
-                                            notifyItemRemoved(holder.getAdapterPosition());
+                            int id = l.getId();
 
-                                        } else {
-                                            Toast.makeText(v.getContext(),
-                                                    "Erro ao deletar",
-                                                    Toast.LENGTH_SHORT).show();
+                            ApiService api = RetrofitInstance
+                                    .getRetrofitInstance(v.getContext())
+                                    .create(ApiService.class);
+
+                            SharedPreferences sharedPref = v.getContext()
+                                    .getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
+
+                            String token = sharedPref.getString("auth_token", null);
+
+                            api.deletarLancamento("Token " + token, id)
+                                    .enqueue(new Callback<Void>() {
+
+                                        @Override
+                                        public void onResponse(Call<Void> call, Response<Void> response) {
+                                            if (response.isSuccessful()) {
+
+                                                Toast.makeText(v.getContext(),
+                                                        "Deletado com sucesso",
+                                                        Toast.LENGTH_SHORT).show();
+
+                                                int pos = holder.getAdapterPosition();
+                                                lista.remove(pos);
+                                                notifyItemRemoved(pos);
+
+                                            } else {
+                                                Toast.makeText(v.getContext(),
+                                                        "Erro ao deletar",
+                                                        Toast.LENGTH_SHORT).show();
+                                            }
                                         }
-                                    }
 
-                                    @Override
-                                    public void onFailure(Call<Void> call, Throwable t) {
-                                        Toast.makeText(v.getContext(),
-                                                "Falha: " + t.getMessage(),
-                                                Toast.LENGTH_LONG).show();
-                                    }
-                                });
+                                        @Override
+                                        public void onFailure(Call<Void> call, Throwable t) {
+                                            Toast.makeText(v.getContext(),
+                                                    "Falha: " + t.getMessage(),
+                                                    Toast.LENGTH_LONG).show();
+                                        }
+                                    });
 
-                    })
-                    .setNegativeButton("Cancelar", null)
-                    .show();
-        });
+                        })
+                        .setNegativeButton("Cancelar", null)
+                        .show();
+            });
+        }
     }
 
     private void abrirEdicao(Lancamento l) {
@@ -185,6 +210,7 @@ public class LancamentoAdapter extends RecyclerView.Adapter<LancamentoAdapter.Vi
             btnPagar = itemView.findViewById(R.id.btnPagar);
             btnEditar = itemView.findViewById(R.id.btnEditar);
             btnDelete = itemView.findViewById(R.id.btnDelete);
+            btnFatura = itemView.findViewById(R.id.btnFatura);
         }
     }
 }

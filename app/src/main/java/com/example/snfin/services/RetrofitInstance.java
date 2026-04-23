@@ -18,9 +18,8 @@ import java.io.IOException;
 
 public class RetrofitInstance {
 
-//    private static final String BASE_URL = "http://134.255.176.164:49152/api/";
-//    protected static final String BASE_URL = "http://134.255.176.164:49153/api/";
     protected static final String BASE_URL = "http://192.168.1.108:8000/api/";
+//    protected static final String BASE_URL = "https://snfin.samukaoliveira.com.br/api/";
     private static Retrofit retrofit;
 
     public static Retrofit getRetrofitInstance(Context context) {

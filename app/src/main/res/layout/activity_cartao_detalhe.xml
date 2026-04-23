@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/cinza_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="50dp">
+
+    <!-- ===== HEADER ===== -->
+    <RelativeLayout
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/btnHome"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/logo_mini"
+            android:background="@android:color/transparent"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"/>
+
+        <ImageButton
+            android:id="@+id/btnPrev"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_arrow_back"
+            android:background="@android:color/transparent"
+            android:layout_toEndOf="@id/btnHome"
+            android:layout_marginStart="8dp"
+            android:layout_centerVertical="true"
+            card_view:tint="@color/verde_principal" />
+
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sair"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/cinza_texto"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"/>
+
+        <ImageButton
+            android:id="@+id/btnNext"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_arrow_forward"
+            android:background="@android:color/transparent"
+            android:layout_toStartOf="@id/btnLogout"
+            android:layout_marginEnd="8dp"
+            android:layout_centerVertical="true"
+            android:tint="@color/verde_principal"/>
+
+        <TextView
+            android:id="@+id/tvCompetencia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Abr/2026"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/verde_principal"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+    <!-- ===== BOTÃO NOVO ===== -->
+    <Button
+        android:id="@+id/btnNovo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="➕ Novo Lançamento"
+        android:backgroundTint="@color/verde_claro"
+        android:textColor="@android:color/white"
+        android:layout_margin="16dp"/>
+
+    <!-- ===== CARDS ===== -->
+    <GridLayout
+        android:columnCount="2"
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- FATURA ATUAL -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardFatura"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_margin="8dp"
+            card_view:cardCornerRadius="12dp"
+            card_view:cardElevation="8dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fatura Atual"
+                    android:textColor="#666"/>
+
+                <TextView
+                    android:id="@+id/tvFaturaAtual"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="R$ 0,00"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/despesa"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- FALTA PAGAR -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_margin="8dp"
+            card_view:cardCornerRadius="12dp"
+            card_view:cardElevation="8dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Falta Pagar"
+                    android:textColor="#666"/>
+
+                <TextView
+                    android:id="@+id/tvFaltaPagar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="R$ 0,00"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/despesa"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- LIMITE -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_margin="8dp"
+            card_view:cardCornerRadius="12dp"
+            card_view:cardElevation="8dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Limite Disponível"
+                    android:textColor="#666"/>
+
+                <TextView
+                    android:id="@+id/tvLimite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="R$ 0,00"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/verde_claro"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- PARCELADAS -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_margin="8dp"
+            card_view:cardCornerRadius="12dp"
+            card_view:cardElevation="8dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Compras Parceladas"
+                    android:textColor="#666"/>
+
+                <TextView
+                    android:id="@+id/tvParceladas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="R$ 0,00"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/verde_principal"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </GridLayout>
+
+    <!-- ===== HEADER LISTA ===== -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:background="@color/verde_principal"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Data"
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="Lançamento"
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"
+            android:text="Valor"
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Status"
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Ações"
+            android:textColor="@android:color/white"/>
+    </LinearLayout>
+
+    <!-- ===== LISTA ===== -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvLancamentos"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingBottom="100dp"/>
+
+    <!-- ===== LOADING ===== -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"/>
+
+</LinearLayout>

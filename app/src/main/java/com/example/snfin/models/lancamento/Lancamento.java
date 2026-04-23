@@ -32,11 +32,24 @@ public class Lancamento {
     @SerializedName("grupo_id")
     private String grupoId;
 
+    // =========================
+    // 🔥 NOVOS CAMPOS (CARTÃO)
+    // =========================
+
+    @SerializedName("tipo")
+    private String tipo;
+
+    @SerializedName("cartao_id")
+    private Integer cartaoId;
+
+    // =========================
     // 🔥 GETTERS
+    // =========================
 
     public Integer getId() {
         return id;
     }
+
     public String getDescricao() {
         return descricao;
     }
@@ -77,7 +90,61 @@ public class Lancamento {
         return grupoId;
     }
 
-    // 🎯 FORMATADOR (igual seu template Django)
+    // =========================
+    // 🔥 GETTERS CARTÃO
+    // =========================
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public Integer getCartaoId() {
+        return cartaoId;
+    }
+
+    // =========================
+    // 🔥 SETTERS (necessários pro fake)
+    // =========================
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+
+    public void setPago(boolean pago) {
+        this.pago = pago;
+    }
+
+    public void setNatureza(String natureza) {
+        this.natureza = natureza;
+    }
+
+    public void setFixo(String fixo) {
+        this.fixo = fixo;
+    }
+
+    public void setParcelas(int parcelas) {
+        this.parcelas = parcelas;
+    }
+
+    public void setCartaoId(Integer cartaoId) {
+        this.cartaoId = cartaoId;
+    }
+
+    // =========================
+    // 🎯 FORMATADOR (igual Django)
+    // =========================
 
     private String formatarData(String data) {
         try {
@@ -95,5 +162,9 @@ public class Lancamento {
         } catch (Exception e) {
             return data;
         }
+    }
+
+    public Integer getFatura() {
+        return fatura;
     }
 }

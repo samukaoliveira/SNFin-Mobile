@@ -2,6 +2,8 @@ package com.example.snfin.services;
 
 import com.example.snfin.models.LoginResponse;
 import com.example.snfin.models.UsuarioLoginRequest;
+import com.example.snfin.models.cartao.CartaoDetalheDTO;
+import com.example.snfin.models.cartao.CartaoDetalheResponse;
 import com.example.snfin.models.escala.EscalaDetalhada;
 import com.example.snfin.models.escala.EscalaNotificacao;
 import com.example.snfin.models.escala.EscalaSimples;
@@ -49,6 +51,12 @@ public interface ApiService {
 
     @DELETE("lancamentos/{id}/delete/")
     Call<Void> deletarLancamento(
+            @Header("Authorization") String token,
+            @Path("id") int id
+    );
+
+    @GET("cartoes/{id}/")
+    Call<CartaoDetalheResponse> getCartao(
             @Header("Authorization") String token,
             @Path("id") int id
     );

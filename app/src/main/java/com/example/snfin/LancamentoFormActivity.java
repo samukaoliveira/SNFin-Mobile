@@ -81,7 +81,6 @@ public class LancamentoFormActivity extends AppCompatActivity {
 
     private void setupListeners() {
 
-        // 🔥 DATE PICKER AQUI
         etData.setOnClickListener(v -> {
             Calendar calendar = Calendar.getInstance();
 
@@ -119,7 +118,6 @@ public class LancamentoFormActivity extends AppCompatActivity {
         });
 
         btnCancelar.setOnClickListener(v -> finish());
-
         btnSalvar.setOnClickListener(v -> salvar());
     }
 
@@ -135,11 +133,45 @@ public class LancamentoFormActivity extends AppCompatActivity {
             etDescricao.setText(intent.getStringExtra("descricao"));
             etValor.setText(String.valueOf(intent.getDoubleExtra("valor", 0)));
             etData.setText(intent.getStringExtra("data"));
-
             cbPago.setChecked(intent.getBooleanExtra("pago", false));
+
+            // 🔥 NOVO: recuperar valores
+            String natureza = intent.getStringExtra("natureza");
+            String fixo = intent.getStringExtra("fixo");
+            int parcelas = intent.getIntExtra("parcelas", 0);
+
+            Log.d("EDIT", "Natureza: " + natureza);
+            Log.d("EDIT", "Fixo: " + fixo);
+            Log.d("EDIT", "Parcelas: " + parcelas);
+
+            // 🔥 NOVO: setar spinner Natureza
+            if (natureza != null) {
+                ArrayAdapter adapterNatureza = (ArrayAdapter) spNatureza.getAdapter();
+                int posNatureza = adapterNatureza.getPosition(natureza);
+                if (posNatureza >= 0) {
+                    spNatureza.setSelection(posNatureza);
+                }
+            }
+
+            // 🔥 NOVO: setar spinner Fixo
+            if (fixo != null) {
+                ArrayAdapter adapterFixo = (ArrayAdapter) spFixo.getAdapter();
+                int posFixo = adapterFixo.getPosition(fixo);
+                if (posFixo >= 0) {
+                    spFixo.setSelection(posFixo);
+                }
+            }
+
+            // 🔥 NOVO: parcelas
+            if (parcelas > 0) {
+                etParcelas.setText(String.valueOf(parcelas));
+                etParcelas.setVisibility(View.VISIBLE);
+            }
+
         } else {
             spEscopo.setVisibility(View.GONE);
         }
+
         Log.d("EDIT", "ID recebido: " + lancamentoId);
     }
 
@@ -179,6 +211,7 @@ public class LancamentoFormActivity extends AppCompatActivity {
             } else {
                 call = api.atualizarLancamento(token, lancamentoId, req);
             }
+
             Log.d("API", "Modo: " + (lancamentoId == -1 ? "CREATE" : "UPDATE"));
 
             call.enqueue(new Callback<Void>() {

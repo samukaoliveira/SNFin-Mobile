@@ -1,9 +1,6 @@
 package com.example.snfin.models.lancamento;
 
-import com.example.snfin.models.lancamento.CartaoResumo;
-import com.example.snfin.models.lancamento.Lancamento;
-import com.example.snfin.models.lancamento.Saldos;
-import com.example.snfin.models.lancamento.Totais;
+import com.example.snfin.models.cartao.CartaoResumoDTO;
 
 import java.util.List;
 
@@ -13,7 +10,7 @@ public class DashboardResponse {
     private Saldos saldos;
 
     private List<Lancamento> lancamentos;
-    private List<CartaoResumo> cartoes;
+    private List<CartaoResumoDTO> cartoes;
 
     public Totais getTotais() {
         return totais;
@@ -27,7 +24,7 @@ public class DashboardResponse {
         return lancamentos;
     }
 
-    public List<CartaoResumo> getCartoes() {
+    public List<CartaoResumoDTO> getCartoes() {
         return cartoes;
     }
 }
