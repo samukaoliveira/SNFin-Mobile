@@ -53,7 +53,7 @@
             android:layout_toStartOf="@id/btnLogout"
             android:layout_marginEnd="8dp"
             android:layout_centerVertical="true"
-            android:tint="@color/verde_principal"/>
+            card_view:tint="@color/verde_principal" />
 
         <TextView
             android:id="@+id/tvCompetencia"
@@ -66,6 +66,18 @@
             android:layout_centerInParent="true"/>
 
     </RelativeLayout>
+
+    <!-- 🔥 NOME DO CARTÃO (NOVO) -->
+    <TextView
+        android:id="@+id/tvNomeCartao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cartão"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/preto"
+        android:gravity="center"
+        android:paddingBottom="8dp"/>
 
     <!-- ===== BOTÃO NOVO ===== -->
     <Button
@@ -273,6 +285,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="16dp"/>
+        android:layout_margin="16dp"
+        android:visibility="gone"/>
 
 </LinearLayout>

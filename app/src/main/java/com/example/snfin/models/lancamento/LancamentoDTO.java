@@ -9,6 +9,7 @@ public class LancamentoDTO {
     private String fixo;
     private Integer parcelas;
     private boolean pago;
+    private Integer fatura;
 
     // getters e setters
 
@@ -66,5 +67,15 @@ public class LancamentoDTO {
 
     public void setPago(boolean pago) {
         this.pago = pago;
+    }
+
+
+
+    public Integer getFatura() {
+        return fatura;
+    }
+
+    public void setFatura(Integer fatura) {
+        this.fatura = fatura;
     }
 }

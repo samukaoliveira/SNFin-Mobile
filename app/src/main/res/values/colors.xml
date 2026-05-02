@@ -8,4 +8,5 @@
     <color name="cinza_shadow">#9e9e9e</color>
     <color name="branco">#ffffff</color>
     <color name="despesa">#d32f2f</color>
+    <color name="preto">#040404</color>
 </resources>
